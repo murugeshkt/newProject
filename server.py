@@ -4,7 +4,8 @@ async def handle(request):
     name = request.match_info.get('name', "World!")
     print("Testing with github actions")
     text = "Hello, " + name
-    print('received request, replying with "{}".'.format(text))
+    #print('received request, replying with "{}".'.format(text))
+    print(text)
     return web.Response(text=text)
 
 app = web.Application()
