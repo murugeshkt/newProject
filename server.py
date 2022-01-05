@@ -1,15 +1,13 @@
-from aiohttp import web
+from flask import Flask
+import os
 
-async def handle(request):      
-    name = request.match_info.get('name', "World!")
-    print("Testing with github actions")
-    text = "Hello, " + name
-    #print('received request, replying with "{}".'.format(text))
-    print(text)
-    return web.Response(text=text)
+app = Flask(__name__)
 
-app = web.Application()
-app.router.add_get('/', handle)
-app.router.add_get('/{name}', handle)
+@app.route("/")
+def hello():
+    return "Flask inside Docker!!"
 
-web.run_app(app, port=5858)
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(debug=True,host='0.0.0.0',port=port)
